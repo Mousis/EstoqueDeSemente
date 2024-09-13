@@ -1,0 +1,36 @@
+﻿@model IEnumerable<EstoqueDeSemente.Models.Produto>
+
+<div class="row">
+    <div class="col-md-10">
+        <table class="table table-bordered table-striped mt-2">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Data de Vencimento</th>
+                    <th>Fornecedor</th>
+                    <th>Quantidade do Produto</th>
+                    <th class="w-25"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var produto in Model)
+                {
+                    <tr>
+                        <td>@produto.Nome</td>
+                        <td>@produto.DataDeVencimento?.ToShortDateString()</td>
+                        <td>@produto.Fornecedor</td>
+                        <td>@produto.QuantidadeDeProduto</td>
+                        <td>
+                            @Html.ActionLink("Edita", "Edita", new { id = produto.ProdutoId }, new { @class = "btn btn-primary" })
+                            <form action="@Url.Action("DeletarProduto", "Home", new { id = produto.ProdutoId })" method="post" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a asp-action="Adicionar" asp-controller="Home" class="btn btn-success">Adicionar Produto</a>
+    </div>
+</div>
