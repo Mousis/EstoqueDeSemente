@@ -11,7 +11,7 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0-nanoserver-1809 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["EstoqueDeSemente/EstoqueDeSemente.csproj", "EstoqueDeSemente/"]
+COPY ["EstoqueDeSemente/EstoqueDeSemente.csproj", "./"]
 RUN dotnet restore "./EstoqueDeSemente/./EstoqueDeSemente.csproj"
 COPY . .
 WORKDIR "/src/EstoqueDeSemente"
